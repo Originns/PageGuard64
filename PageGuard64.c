@@ -231,7 +231,7 @@ static LPVOID HandlePageGuard(LPVOID pAddress)
     return NULL;
 }
 
-LONG __stdcall ExceptionHandler(EXCEPTION_POINTERS* ExceptionInfo)
+LONG WINAPI ExceptionHandler(EXCEPTION_POINTERS* ExceptionInfo)
 {
     if (ExceptionInfo->ExceptionRecord->ExceptionCode == STATUS_GUARD_PAGE_VIOLATION)
     {
