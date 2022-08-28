@@ -231,7 +231,7 @@ static LPVOID HandlePageGuard(LPVOID pAddress)
     return NULL;
 }
 
-LONG WINAPI ExceptionHandler(EXCEPTION_POINTERS* ExceptionInfo)
+static LONG WINAPI ExceptionHandler(EXCEPTION_POINTERS* ExceptionInfo)
 {
     if (ExceptionInfo->ExceptionRecord->ExceptionCode == STATUS_GUARD_PAGE_VIOLATION)
     {
@@ -239,7 +239,11 @@ LONG WINAPI ExceptionHandler(EXCEPTION_POINTERS* ExceptionInfo)
 
         if (pDetour)
         {
+#if defined(_M_X64) || defined(__x86_64__)
             ExceptionInfo->ContextRecord->Rip = (DWORD64)pDetour;
+#else
+            ExceptionInfo->ContextRecord->Eip = (DWORD)pDetour;
+#endif
         }
 
         ExceptionInfo->ContextRecord->EFlags |= 0x100;

@@ -1,3 +1,3 @@
 # PageGuard64
 
-A 64 bit MinHook style hooking library utilizing the PAGE_GUARD memory protection to allow for VEH hooking.
+x86/x86_64 MinHook style hooking library utilizing the PAGE_GUARD memory protection to allow for VEH hooking.
