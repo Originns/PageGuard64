@@ -130,11 +130,6 @@ static BOOL EnableHookLL(UINT pos, BOOL enable)
 {
     PHOOK_ENTRY pHook = &g_hooks.pItems[pos];
 
-    if (pHook->bActive != enable)
-    {
-        pHook->bActive = enable;
-    }
-
     if (enable)
     {
         GuardEntry(pHook);
@@ -144,6 +139,11 @@ static BOOL EnableHookLL(UINT pos, BOOL enable)
             // adding the protection didn't work
             return FALSE;
         }
+    }
+
+    if (pHook->bActive != enable)
+    {
+        pHook->bActive = enable;
     }
 
     // dont unguard since there could be other hooks in this page - let the veh handle this
